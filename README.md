@@ -5,7 +5,7 @@ DT2119 Speech and Speaker Recognition course's project at KTH Royal Institute of
 #### Author: Diego González Morín.
 
 Report : [Deep Neural Networks for Piano Music Transcription](Report/Draft-Diego-Gonzalez.pdf)
-Poster: [Poster Sesion](Report/Poster.pdf)
+Poster: [Poster Session](Report/Poster.pdf)
 
 ## Abstract
 
