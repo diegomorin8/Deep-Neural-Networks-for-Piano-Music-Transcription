@@ -40,41 +40,27 @@ y_val = np.load(data_directory + "train_va/" + str(0) + "train_va_y.npy" )
 # Count the number of files in the training folder 
 num_tr_batches = len([name for name in os.listdir(data_directory + "train_tr/")])/2
 
+# Count the number of files in the training folder 
+num_tr_batches = len([name for name in os.listdir(data_directory + "train_tr/")])/2
+
+print 'Loading all data'
+for i in range(num_tr_batches):
+    print "Batching..." + str(i) + "train_tr_X.npy"
+    X_train = np.array(np.load(data_directory + "train_tr/" + str(i) + "train_tr_X.npy" ))
+    y_train = np.array(np.load(data_directory + "train_tr/" + str(i) + "train_tr_y.npy" ))
+    if i == 0:
+        X = X_train
+        y = y_train
+    else:
+        X = np.concatenate((X,X_train), axis = 0)
+        y = np.concatenate((y,y_train), axis = 0)
+        
 checkpointer = ModelCheckpoint(filepath= weights_dir + "weights.hdf5", verbose=1, save_best_only=False)
+early = EarlyStopping(monitor='val_loss', min_delta=0, patience=20, verbose=1, mode='auto')
 
 training_log = open(weights_dir + "Training.log", "w")
-
 print 'Train . . .'
-# let's say you have an ImageNet generator that yields ~10k samples at a time.
-for epoch in range(starting_epoch,num_epochs):
-    print " Epoch .-.-.-.-.-.-.-.- %d:" % epoch
-    for i in range(num_tr_batches): 
-        print " Batching file : " + str(i) + "train_tr_X.npy"
-        X_train = np.load(data_directory + "train_tr/" + str(i) + "train_tr_X.npy" )
-        y_train = np.load(data_directory + "train_tr/" + str(i) + "train_tr_y.npy" )
-        save = model.fit(X_train, y_train,batch_size=mini_batch_size,epochs = 1,validation_data=(X_val, y_val),verbose=0, callbacks=[checkpointer])
-        training_log.write(str(save.history) + "\n")
-        print save.history
-    test = np.load(data_directory + "test/" + str(0) + "test_X.npy" )  
-    predictions = model.predict(test, batch_size=mini_batch_size, verbose = 1)
-    predictions = predictions.round()
-    test = np.load(data_directory + "test/" + str(0) + "test_y.npy" )
-    TP = np.count_nonzero(np.logical_and( predictions == 1, test == 1 ))
-    FN = np.count_nonzero(np.logical_and( predictions == 0, test == 1 ))
-    FP = np.count_nonzero(np.logical_and( predictions == 1, test == 0 ))
-    if (TP + FN) > 0:
-        R = TP/float(TP + FN)
-        P = TP/float(TP + FP)
-        A = 100*TP/float(TP + FP + FN)
-        if P == 0 and R == 0:
-            F = 0
-        else: 
-            F = 100*2*P*R/(P + R)
-    else: 
-        A = 0
-        F = 0
-    if F > best_accuracy:
-         model.save(weights_dir + "best_model.hdf5")
-         best_accuracy = F
-    print "\n Accuracy %.6f: " %F + " Best Accuracy %.6f:" %best_accuracy + "\n"    
+# let's say you have an ImageNet generat        print "Fitting the batch :"
+save = model.fit(X, y,batch_size=mini_batch_size,epochs = num_epochs,validation_data=(X_val, y_val),verbose=1,callbacks=[checkpointer,early])
+training_log.write(str(save.history) + "\n")
 training_log.close()
