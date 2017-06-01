@@ -47,6 +47,19 @@ The best results are shown in the following table:
 |  Model | Size | Test Set |  F-measure  | Accuracy  | F-measure | Accuracy|
 |:-------|:-----|:---------|:------------|:----------|:----------|:--------|
 |  DNN   |   3L |  Set 1   |  69.36%     |  53.09%   |  70.61%   | 54.58%  |  
+|  LSTM  |   3L |  Set 1   |  68.95%     |  52.61%   |  69.36%   | 53.09%  |
+|  DNN   |   3L |  Set 2   |  65.29%     |  48.47%   |  66.54%   | 49.86%  |
+|  LSTM  |   3L |  Set 2   |  66.05%     |  49.31%   |  66.37%   | 49.67%  |
+
+And the plotted predictions for a 1m 30s subset of the test set: 
+
+![Predictions](Figures/out.png)
+
+Finally, some famous songs were used as input to the network. The predictions for this song were transformed back to MIDI and gathered in the following video: 
+
+[![Alt text](https://img.youtube.com/vi/VID/0.jpg)](https://www.youtube.com/watch?v=VID)
+
+
 
 
 
