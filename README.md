@@ -57,7 +57,7 @@ And the plotted predictions for a 1m 30s subset of the test set:
 
 Finally, some famous songs were used as input to the network. The predictions for this song were transformed back to MIDI and gathered in the following video: 
 
-[![Alt text](https://www.youtube.com/watch?v=oAgbFvow_4c)](https://www.youtube.com/watch?v=oAgbFvow_4c)
+[![Alt text](Figures/youtube.png)](https://www.youtube.com/watch?v=oAgbFvow_4c)
 
 
 
