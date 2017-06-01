@@ -32,4 +32,22 @@ The main experiment's goal was, as it was mentioned previously, to compare DNNs 
   
 ![Training](Figures/Training.png)
 
+## Training
+
+Networks were built and trained using Keras with Tensor Flow backend using the following parameters: 
+
+  - Adam optimizers
+  - 20% Dropout
+  - Early stopping with validation data
+  
+## Results
+
+The best results are shown in the following table: 
+
+|  Model | Size | Test Set |  F-measure  | Accuracy  | F-measure | Accuracy|
+|:-------|:-----|:---------|:------------|:----------|:----------|:--------|
+|  DNN   |   3L |  Set 1   |  69.36%     |  53.09%   |  70.61%   | 54.58%  |  
+
+
+
 
